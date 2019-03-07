@@ -1,10 +1,12 @@
 package com.javadoop.springaoplearning;
 
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.javadoop.springaoplearning.service.OrderService;
 import com.javadoop.springaoplearning.service.UserService;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author: hongjie
@@ -15,12 +17,13 @@ public class Application {
 
     public static void main(String[] args) {
 
-        test_Spring_1_2_Advice();
+//        test_Spring_1_2_Advice();
 //        test_Spring_1_2_Advisor();
 //        test_Spring_1_2_BeanNameAutoProxy();
 //        test_Spring_1_2_DefaultAdvisorAutoProxy();
 //        test_Spring_2_0_AspectJ();
 //        test_Spring_2_0_Schema_Based();
+        test_spring_1_1_interceptor();
     }
 
 
@@ -90,6 +93,7 @@ public class Application {
         userService.queryUser();
     }
 
+
     public static void test_Spring_2_0_Schema_Based() {
 
         // 启动 Spring 的 IOC 容器
@@ -100,5 +104,10 @@ public class Application {
         userService.createUser("Tom", "Cruise", 55);
     }
 
+    public static void test_spring_1_1_interceptor() {
+        ApplicationContext resource = new ClassPathXmlApplicationContext("classpath:spring_1_1_interceptor.xml");
+        OrderService bean = (OrderService)resource.getBean("bean");
+        bean.queryOrder("1");
+    }
 
 }
